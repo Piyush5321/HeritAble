@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeritAble - AI Cultural Heritage Guide</title>
+  
+  <!-- Fonts: Inter & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  
+  <!-- Core Design System Stylesheet -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- Top App Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-logo" data-view="home" id="nav-brand">
+        <span class="material-symbols-outlined" style="color: var(--color-secondary);">account_balance</span>
+        HeritAble<span class="dot">.</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item"><button class="nav-link active" data-view="home" id="nav-home">Home</button></li>
+          <li class="nav-item"><button class="nav-link" data-view="explore" id="nav-explore">Explore Culture</button></li>
+          <li class="nav-item"><button class="nav-link" data-view="map" id="nav-map">Heritage Map</button></li>
+          <li class="nav-item"><button class="nav-link" data-view="museum" id="nav-museum">AI Museum</button></li>
+          <li class="nav-item"><button class="nav-link" data-view="learn" id="nav-learn">Learn & Play</button></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Accessibility Quick Access -->
+        <button class="icon-btn accessibility-btn open-accessibility-btn" title="Accessibility Settings" id="btn-header-accessibility" aria-label="Open accessibility options">
+          <span class="material-symbols-outlined">accessibility_new</span>
+        </button>
+
+        <!-- User Profile / Login -->
+        <button class="avatar-btn open-auth-modal-btn" title="Account Settings" id="btn-header-user" aria-label="User profile and login">
+          <span class="material-symbols-outlined text-sm">person</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Stage -->
+  <main class="main-content">
+
+    <!-- ==================== VIEW 1: HOME ==================== -->
+    <section id="view-home" class="view-section active">
+      <!-- Hero Banner -->
+      <div class="hero-card">
+        <div class="hero-background-art" style="background-image: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1200&q=80');"></div>
+        <div class="hero-content">
+          <h1 class="hero-title">Discover Your Roots.<br>Experience Your Heritage.</h1>
+          <p class="hero-subtitle">Your AI cultural companion is ready to guide you through centuries of history, living traditions, and untold stories.</p>
+          <div class="hero-cta-group">
+            <button class="btn btn-primary" data-view="storyteller" id="btn-hero-talk">
+              <span class="material-symbols-outlined">mic</span> Talk to HeritAble
+            </button>
+            <button class="btn btn-secondary" data-view="explore" id="btn-hero-explore">
+              Explore Culture
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Explore Your Culture Section -->
+      <div class="section-title-group">
+        <h2 class="section-title">Explore Your Culture</h2>
+        <p class="section-subtitle">Immerse yourself in global festivals, generational customs, and ancestral roots.</p>
+      </div>
+
+      <div class="home-explore-grid">
+        <!-- Featured Card: Festival of Lights -->
+        <div class="featured-banner-card" style="background-image: url('https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=1000&q=80');" onclick="openStorytellerWithPrompt('Tell me about Diwali and the Festival of Lights across Indian heritage')">
+          <div class="featured-banner-overlay"></div>
+          <div class="featured-banner-content">
+            <span class="pill-badge festivals">Festivals</span>
+            <h3 class="text-2xl font-bold mb-2">The Festival of Lights</h3>
+            <p class="text-sm opacity-90">Discover the origins, spiritual symbolism, and community warmth of this ancient celebration.</p>
+          </div>
+        </div>
+
+        <!-- Secondary Cards -->
+        <div class="home-secondary-cards">
+          <div class="quick-card" onclick="showView('explore')">
+            <div class="quick-card-left">
+              <div class="quick-card-icon amber">
+                <span class="material-symbols-outlined">menu_book</span>
+              </div>
+              <div class="quick-card-info">
+                <h3>Traditions</h3>
+                <p>Generational customs & living folklore</p>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-outline">arrow_forward</span>
+          </div>
+
+          <div class="quick-card" onclick="showView('explore')">
+            <div class="quick-card-left">
+              <div class="quick-card-icon green">
+                <span class="material-symbols-outlined">restaurant</span>
+              </div>
+              <div class="quick-card-info">
+                <h3>Culinary Roots</h3>
+                <p>Ancestral recipes & culinary heritage</p>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-outline">arrow_forward</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: EXPLORE CULTURE ==================== -->
+    <section id="view-explore" class="view-section">
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold text-primary mb-2">Explore Culture</h1>
+        <p class="text-on-surface-variant">Search and discover traditions, historic architectures, and vibrant ceremonies from every corner of the world.</p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="explore-search-bar">
+        <span class="material-symbols-outlined text-secondary">search</span>
+        <input type="text" id="explore-search" class="explore-search-input" placeholder="What would you like to explore? (e.g. Tea Ceremony, Holi, Nalanda)" />
+        <button class="icon-btn" onclick="startVoiceRecognition()" title="Voice Search">
+          <span class="material-symbols-outlined">mic</span>
+        </button>
+      </div>
+
+      <!-- Filter Pills Row -->
+      <div class="filter-pills-row">
+        <button class="filter-pill active" data-filter="all"><span class="material-symbols-outlined text-sm">public</span> All</button>
+        <button class="filter-pill" data-filter="country"><span class="material-symbols-outlined text-sm">language</span> Country</button>
+        <button class="filter-pill" data-filter="state"><span class="material-symbols-outlined text-sm">map</span> State</button>
+        <button class="filter-pill" data-filter="culture"><span class="material-symbols-outlined text-sm">groups</span> Culture</button>
+        <button class="filter-pill festivals-highlight" data-filter="festivals"><span class="material-symbols-outlined text-sm">celebration</span> Festivals</button>
+        <button class="filter-pill traditions-highlight" data-filter="traditions"><span class="material-symbols-outlined text-sm">auto_stories</span> Traditions</button>
+        <button class="filter-pill" data-filter="food"><span class="material-symbols-outlined text-sm">restaurant</span> Food</button>
+      </div>
+
+      <!-- Culture Cards Grid -->
+      <div class="culture-cards-grid">
+        <!-- Card 1: Holi -->
+        <article class="culture-card" data-category="festivals">
+          <div class="culture-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=800&q=80" alt="Holi Festival of Colors" class="culture-card-img" />
+          </div>
+          <div class="culture-card-body">
+            <div class="card-meta-row">
+              <span class="pill-badge festivals">FESTIVAL</span>
+              <span class="meta-location"><span class="material-symbols-outlined text-sm">location_on</span> India</span>
+            </div>
+            <h3 class="culture-card-title">Holi Festival of Colors</h3>
+            <p class="culture-card-desc">A vibrant celebration of love, spring, and the triumph of good over evil. Powdered pigments fill the air as music unites diverse communities.</p>
+            <div class="card-actions-row">
+              <button class="btn btn-primary btn-sm" onclick="openStorytellerWithPrompt('Tell me about the history and rituals of Holi in India')">Explore</button>
+              <button class="btn btn-outline btn-sm" onclick="speakText('Holi is a vibrant festival celebrating love, spring, and the triumph of good over evil across India and the global diaspora.')">
+                <span class="material-symbols-outlined text-sm">volume_up</span> Listen
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Tea Ceremony -->
+        <article class="culture-card" data-category="traditions">
+          <div class="culture-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80" alt="The Way of Tea" class="culture-card-img" />
+          </div>
+          <div class="culture-card-body">
+            <div class="card-meta-row">
+              <span class="pill-badge traditions">TRADITION</span>
+              <span class="meta-location"><span class="material-symbols-outlined text-sm">location_on</span> Kyoto, Japan</span>
+            </div>
+            <h3 class="culture-card-title">The Way of Tea (Chanoyu)</h3>
+            <p class="culture-card-desc">A choreographic ritual of preparing and serving powdered Japanese green tea (matcha), embodying the philosophy of harmony, respect, and mindfulness.</p>
+            <div class="card-actions-row">
+              <button class="btn btn-primary btn-sm" onclick="openStorytellerWithPrompt('Explain the steps and wabi-sabi philosophy of the Japanese Chanoyu tea ritual')">Explore</button>
+              <button class="btn btn-outline btn-sm" onclick="speakText('The Way of Tea, or Chanoyu, is a choreographic ritual celebrating wabi-sabi, harmony, and presence in Kyoto teahouses.')">
+                <span class="material-symbols-outlined text-sm">volume_up</span> Listen
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: Tikal Citadel -->
+        <article class="culture-card" data-category="culture">
+          <div class="culture-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=800&q=80" alt="Tikal Citadel" class="culture-card-img" />
+          </div>
+          <div class="culture-card-body">
+            <div class="card-meta-row">
+              <span class="pill-badge ancient">ARCHITECTURE</span>
+              <span class="meta-location"><span class="material-symbols-outlined text-sm">location_on</span> Petén, Guatemala</span>
+            </div>
+            <h3 class="culture-card-title">Tikal Citadel</h3>
+            <p class="culture-card-desc">Explore the limestone ruins of an ancient pre-Columbian Maya empire nestled in the heart of the rainforest, renowned for towering ceremonial pyramids.</p>
+            <div class="card-actions-row">
+              <button class="btn btn-primary btn-sm" onclick="openStorytellerWithPrompt('Tell me about the Maya civilization at Tikal Citadel in Guatemala')">Explore</button>
+              <button class="btn btn-outline btn-sm" onclick="speakText('Tikal Citadel is an ancient Maya urban center famous for its towering pyramids rising above the lush rainforest canopy.')">
+                <span class="material-symbols-outlined text-sm">volume_up</span> Listen
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4: Chhath Puja -->
+        <article class="culture-card" data-category="festivals">
+          <div class="culture-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Chhath Puja" class="culture-card-img" />
+          </div>
+          <div class="culture-card-body">
+            <div class="card-meta-row">
+              <span class="pill-badge festivals">FESTIVAL</span>
+              <span class="meta-location"><span class="material-symbols-outlined text-sm">location_on</span> Bihar, India</span>
+            </div>
+            <h3 class="culture-card-title">Chhath Puja: Sun Gratitude</h3>
+            <p class="culture-card-desc">An ancient Vedic celebration expressing reverence to the Sun God for energy, harvest, and life. Devotees stand in rivers to offer prayers at sunrise and sunset.</p>
+            <div class="card-actions-row">
+              <button class="btn btn-primary btn-sm" onclick="openStorytellerWithPrompt('Tell me about Chhath Puja')">Explore</button>
+              <button class="btn btn-outline btn-sm" onclick="speakText('Chhath Puja is an ancient Hindu festival of deep gratitude to Surya and Chhathi Maiya, without idol worship.')">
+                <span class="material-symbols-outlined text-sm">volume_up</span> Listen
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5: Ancestral Cuisine -->
+        <article class="culture-card" data-category="food">
+          <div class="culture-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80" alt="Culinary Roots" class="culture-card-img" />
+          </div>
+          <div class="culture-card-body">
+            <div class="card-meta-row">
+              <span class="pill-badge culinary">FOOD & SPICES</span>
+              <span class="meta-location"><span class="material-symbols-outlined text-sm">location_on</span> Global Heritage</span>
+            </div>
+            <h3 class="culture-card-title">Ayurvedic Spice Traditions</h3>
+            <p class="culture-card-desc">Discover the holistic culinary arts where turmeric, cardamom, and clove are woven into healing daily meals passed down across generations.</p>
+            <div class="card-actions-row">
+              <button class="btn btn-primary btn-sm" onclick="openStorytellerWithPrompt('Tell me about the healing science of spices in ancestral cooking')">Explore</button>
+              <button class="btn btn-outline btn-sm" onclick="speakText('Ayurvedic spice traditions balance nutrition, seasonal rhythms, and ancestral healing herbs in daily meals.')">
+                <span class="material-symbols-outlined text-sm">volume_up</span> Listen
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: HERITAGE MAP ==================== -->
+    <section id="view-map" class="view-section">
+      <div class="map-view-grid">
+        <!-- Left Panel: Filter & Site List -->
+        <div class="map-sidebar-panel">
+          <h2 class="text-xl font-bold text-primary">Interactive Heritage Map</h2>
+          
+          <div class="relative">
+            <input type="text" placeholder="Search historical sites..." class="form-input text-sm" style="min-height: 40px;" />
+          </div>
+
+          <div>
+            <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block mb-2">Filter by Era</label>
+            <div class="flex flex-wrap gap-1.5">
+              <button class="btn btn-sm btn-secondary era-filter-btn active" data-era="all">All Eras</button>
+              <button class="btn btn-sm btn-secondary era-filter-btn" data-era="Ancient">Ancient</button>
+              <button class="btn btn-sm btn-secondary era-filter-btn" data-era="Medieval">Medieval</button>
+              <button class="btn btn-sm btn-secondary era-filter-btn" data-era="Modern">Modern</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block mb-2">Nearby Sites</label>
+            <div class="space-y-2">
+              <div class="quick-card site-list-item" data-site="nalanda" style="padding: 12px;">
+                <div class="quick-card-left">
+                  <div class="quick-card-icon amber" style="width: 36px; height: 36px; font-size: 18px;">
+                    <span class="material-symbols-outlined text-sm">account_balance</span>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-semibold text-primary">Nalanda University</h4>
+                    <span class="pill-badge ancient" style="padding: 2px 6px; font-size: 10px;">ANCIENT</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quick-card site-list-item" data-site="rajgir" style="padding: 12px;">
+                <div class="quick-card-left">
+                  <div class="quick-card-icon green" style="width: 36px; height: 36px; font-size: 18px;">
+                    <span class="material-symbols-outlined text-sm">landscape</span>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-semibold text-primary">Rajgir Hills</h4>
+                    <span class="pill-badge ancient" style="padding: 2px 6px; font-size: 10px;">HISTORIC</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quick-card site-list-item" data-site="tikal" style="padding: 12px;">
+                <div class="quick-card-left">
+                  <div class="quick-card-icon amber" style="width: 36px; height: 36px; font-size: 18px;">
+                    <span class="material-symbols-outlined text-sm">domain</span>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-semibold text-primary">Tikal Citadel</h4>
+                    <span class="pill-badge ancient" style="padding: 2px 6px; font-size: 10px;">MAYA</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quick-card site-list-item" data-site="kyoto_tea" style="padding: 12px;">
+                <div class="quick-card-left">
+                  <div class="quick-card-icon green" style="width: 36px; height: 36px; font-size: 18px;">
+                    <span class="material-symbols-outlined text-sm">local_cafe</span>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-semibold text-primary">Kyoto Tea Gardens</h4>
+                    <span class="pill-badge traditions" style="padding: 2px 6px; font-size: 10px;">MEDIEVAL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle: Interactive Map Stage -->
+        <div class="map-interactive-stage" id="map-stage">
+          <!-- Stylized map canvas pins -->
+          <div class="map-site-pin active" data-site="nalanda" data-era="Ancient" style="top: 45%; left: 56%;">
+            <div class="map-pin-icon"><span class="material-symbols-outlined">account_balance</span></div>
+            <span class="map-pin-label">Nalanda</span>
+          </div>
+
+          <div class="map-site-pin" data-site="rajgir" data-era="Ancient" style="top: 55%; left: 52%;">
+            <div class="map-pin-icon"><span class="material-symbols-outlined">landscape</span></div>
+            <span class="map-pin-label">Rajgir</span>
+          </div>
+
+          <div class="map-site-pin" data-site="tikal" data-era="Ancient" style="top: 65%; left: 26%;">
+            <div class="map-pin-icon"><span class="material-symbols-outlined">domain</span></div>
+            <span class="map-pin-label">Tikal</span>
+          </div>
+
+          <div class="map-site-pin" data-site="kyoto_tea" data-era="Medieval" style="top: 35%; left: 80%;">
+            <div class="map-pin-icon"><span class="material-symbols-outlined">local_cafe</span></div>
+            <span class="map-pin-label">Kyoto</span>
+          </div>
+
+          <!-- Bottom Voice Floating trigger inside map -->
+          <button class="icon-btn" onclick="startVoiceRecognition()" style="position: absolute; bottom: 20px; right: 20px; width: 48px; height: 48px; background: var(--color-primary); color: white;" title="Ask about this area">
+            <span class="material-symbols-outlined">mic</span>
+          </button>
+        </div>
+
+        <!-- Right Panel: Site Details -->
+        <div class="map-detail-panel" id="map-detail-container">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Nalanda" class="map-detail-photo" />
+          <div class="map-detail-body">
+            <div class="flex items-center justify-between">
+              <span class="pill-badge festivals">UNESCO SITE</span>
+              <span class="meta-location"><span class="material-symbols-outlined text-sm">location_on</span> Bihar, India</span>
+            </div>
+            <h2 class="text-2xl font-bold text-primary">Nalanda Mahavihara</h2>
+            
+            <div class="card-actions-row">
+              <button class="btn btn-primary btn-sm" onclick="speakText('Nalanda was a world-famous ancient university in Bihar, India with a 9-story library.')">
+                <span class="material-symbols-outlined">volume_up</span> Listen
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="openStorytellerWithPrompt('Tell me about Nalanda Mahavihara')">
+                <span class="material-symbols-outlined">visibility</span> Describe
+              </button>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-primary mb-1">History & Significance</h4>
+              <p class="text-sm text-on-surface-variant leading-relaxed">Nalanda was a renowned mahavihara (ancient residential Buddhist university) in Bihar, India. Considered to be the world's first residential university, it flourished under the Gupta Empire and Emperor Harsha.</p>
+            </div>
+
+            <div class="p-3 bg-surface-container rounded-lg border border-outline/10">
+              <h4 class="font-semibold text-secondary flex items-center gap-1 text-sm mb-1">
+                <span class="material-symbols-outlined text-sm">auto_awesome</span> Cultural Impact
+              </h4>
+              <p class="text-xs text-on-surface-variant leading-relaxed">At its peak, it attracted scholars from Tibet, China, Korea, and Central Asia, serving as a pivotal center for the transmission of Buddhist philosophy.</p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-primary mb-1">AI Guide Insights</h4>
+              <p class="text-xs text-on-surface-variant leading-relaxed">Architectural marvel of red-brick viharas with elaborate underground cooling channels and meditation halls.</p>
+            </div>
+
+            <button class="btn btn-terracotta w-full" onclick="openStorytellerWithPrompt('Tell me stories of scholars who traveled across continents to study at Nalanda')">
+              <span class="material-symbols-outlined">chat</span> Ask AI About This Place
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: AI MUSEUM GUIDE ==================== -->
+    <section id="view-museum" class="view-section">
+      <div class="text-center max-w-xl mx-auto mb-8">
+        <h1 class="text-3xl font-bold text-primary mb-2">AI Museum Guide</h1>
+        <p class="text-on-surface-variant">Upload or take a photo of any museum artifact, pottery, sculpture, or heirloom to reveal its historical insights, cultural significance, and audio stories.</p>
+      </div>
+
+      <div class="museum-guide-container">
+        <!-- Left: Upload Box -->
+        <div class="space-y-4">
+          <div class="upload-dropzone-card" id="museum-dropzone">
+            <div class="camera-circle-icon">
+              <span class="material-symbols-outlined" style="font-size: 32px;">photo_camera</span>
+            </div>
+            <h3 class="text-xl font-bold text-primary mb-1">Upload or Capture</h3>
+            <p class="text-sm text-on-surface-variant max-w-xs mb-6">Take a photo of a museum object or upload an image from your device to begin.</p>
+            
+            <input type="file" id="artifact-file-input" accept="image/*" style="display: none;" />
+            <button class="btn btn-primary" type="button">
+              <span class="material-symbols-outlined">upload_file</span> Select Image
+            </button>
+          </div>
+
+          <!-- Sample Quick Artifacts -->
+          <div class="sample-artifacts-box">
+            <h4 class="text-xs font-bold text-primary uppercase tracking-wider">Try with Sample Museum Artifacts:</h4>
+            <div class="sample-chips-row">
+              <button class="sample-chip" onclick="selectSampleArtifact('terracotta_vase')">🏺 Terracotta Vessel (2500 BCE)</button>
+              <button class="sample-chip" onclick="selectSampleArtifact('bronze_statue')">✨ Chola Bronze Nataraja</button>
+              <button class="sample-chip" onclick="selectSampleArtifact('mayan_jade')">🎭 Mayan Jade Mask</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Analysis Output -->
+        <div class="artifact-result-card" id="museum-result-box">
+          <div class="awaiting-placeholder">
+            <span class="material-symbols-outlined sparkle-icon">auto_awesome</span>
+            <h3 class="text-xl font-bold text-primary mb-2">Awaiting Artifact</h3>
+            <p class="text-sm max-w-md">Upload an image or pick a sample on the left to reveal archaeological insights, materials analysis, and narrated audio folklore.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 5: AI CULTURAL STORYTELLER (CHAT) ==================== -->
+    <section id="view-storyteller" class="view-section">
+      <div class="storyteller-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="storyteller-sidebar">
+          <div class="mb-4 px-2">
+            <h3 class="font-bold text-primary text-lg flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary">account_balance</span> HeritAble
+            </h3>
+            <p class="text-xs text-on-surface-variant">AI Cultural Guide</p>
+          </div>
+
+          <button class="btn btn-terracotta btn-sm w-full mb-3" onclick="openStorytellerWithPrompt('Share an inspiring story about ancient oral folklore')">
+            <span class="material-symbols-outlined text-sm">forum</span> Talk to HeritAble
+          </button>
+
+          <button class="storyteller-nav-btn" data-view="home"><span class="material-symbols-outlined">home</span> Home</button>
+          <button class="storyteller-nav-btn" data-view="explore"><span class="material-symbols-outlined">explore</span> Explore</button>
+          <button class="storyteller-nav-btn" data-view="map"><span class="material-symbols-outlined">map</span> Heritage Map</button>
+          <button class="storyteller-nav-btn active" data-view="museum"><span class="material-symbols-outlined">museum</span> AI Museum</button>
+          <button class="storyteller-nav-btn" data-view="learn"><span class="material-symbols-outlined">school</span> Learn & Play</button>
+
+          <div class="mt-auto pt-6 border-t border-outline/10 space-y-1">
+            <button class="storyteller-nav-btn open-accessibility-btn"><span class="material-symbols-outlined">settings</span> Settings</button>
+            <button class="storyteller-nav-btn" onclick="alert('HeritAble Support is active. Email: support@heritable.org')"><span class="material-symbols-outlined">help</span> Support</button>
+          </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <div class="storyteller-main-chat">
+          <div>
+            <h1 class="text-3xl font-bold text-primary mb-1">AI Cultural Storyteller</h1>
+            <p class="text-sm text-on-surface-variant">Ask me anything about culture, traditions, and history.</p>
+          </div>
+
+          <!-- Chat Conversation Scroll Area -->
+          <div id="chat-messages-flow" class="space-y-4 flex-1 overflow-y-auto" style="min-height: 400px; max-height: 600px;">
+            <!-- Welcome Agent Bubble -->
+            <div class="chat-bubble-agent">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-secondary">auto_awesome</span>
+                <span class="font-semibold text-primary text-sm">HeritAble AI Guide</span>
+              </div>
+              <p class="text-sm text-on-surface leading-relaxed">Namaste! I am HeritAble. What traditions or stories would you like to explore today?</p>
+              
+              <div class="quick-prompts-row">
+                <button class="quick-prompt-pill" onclick="openStorytellerWithPrompt('Tell me a story about ancient harvest festivals')">"Tell me a story"</button>
+                <button class="quick-prompt-pill" onclick="openStorytellerWithPrompt('Explain the significance of Chhath Puja simply')">"Explain this simply"</button>
+                <button class="quick-prompt-pill" onclick="openStorytellerWithPrompt('Why is living cultural heritage important for future generations?')">"Why is this tradition important?"</button>
+              </div>
+            </div>
+
+            <!-- Example User Question -->
+            <div class="user-bubble">
+              <span>Tell me about Chhath Puja.</span>
+              <span class="material-symbols-outlined text-sm">person</span>
+            </div>
+
+            <!-- Example Rich Story Card -->
+            <div class="story-rich-card">
+              <div class="story-card-header">
+                <span class="material-symbols-outlined text-secondary">wb_sunny</span>
+                <span>Chhath Puja: Worshipping the Sun</span>
+              </div>
+              
+              <p class="text-sm text-on-surface leading-relaxed">Chhath Puja is an ancient Hindu festival deeply rooted in expressing gratitude to Surya, the Sun God, and Chhathi Maiya, for sustaining life on earth. It is celebrated with profound devotion, particularly in the Indian states of Bihar, Jharkhand, and Uttar Pradesh, as well as regions of Nepal.</p>
+              
+              <p class="text-sm text-on-surface leading-relaxed mt-2">Unlike many other festivals, Chhath is unique because it doesn't involve idol worship. Instead, devotees offer prayers directly to the setting and rising sun, standing waist-deep in water—usually a river or pond.</p>
+
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Chhath Puja" class="story-photo-banner" />
+              
+              <div class="flex items-center justify-between text-xs text-on-surface-variant">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">place</span> Bihar, India</span>
+                <button class="text-secondary font-medium hover:underline" onclick="toggleSimplifyText(this)">
+                  <span class="material-symbols-outlined text-xs align-middle">psychology</span> Simplify
+                </button>
+              </div>
+
+              <!-- Audio Narration Controls -->
+              <div class="story-audio-controls">
+                <div class="audio-btn-group">
+                  <button class="audio-action-btn" onclick="speakText('Chhath Puja is an ancient festival of profound devotion where devotees offer prayers to the setting and rising sun standing in river waters.')">
+                    <span class="material-symbols-outlined text-secondary">volume_up</span>
+                    <span>Listen</span>
+                  </button>
+                  <button class="audio-action-btn" onclick="pauseAudio()">
+                    <span class="material-symbols-outlined">pause</span>
+                    <span>Pause</span>
+                  </button>
+                  <button class="audio-action-btn" onclick="speakText('Chhath Puja is an ancient festival of profound devotion where devotees offer prayers to the setting and rising sun standing in river waters.')">
+                    <span class="material-symbols-outlined">replay</span>
+                    <span>Repeat</span>
+                  </button>
+                  <button class="audio-action-btn" onclick="speakText('Chhath Puja is an ancient festival of profound devotion where devotees offer prayers to the setting and rising sun standing in river waters.', 0.8)">
+                    <span class="material-symbols-outlined">speed</span>
+                    <span>Slower</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Chat Input Bar -->
+          <div class="chat-input-bar">
+            <span class="material-symbols-outlined text-outline">keyboard</span>
+            <input type="text" id="storyteller-input" class="chat-input-field" placeholder="Ask a question about traditions, recipes, history..." />
+            <button class="icon-btn" id="chat-send-btn" title="Send message">
+              <span class="material-symbols-outlined text-primary">send</span>
+            </button>
+            <button class="mic-circle-btn" id="chat-mic-btn" title="Voice Input">
+              <span class="material-symbols-outlined">mic</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 6: LEARN & PLAY DASHBOARD ==================== -->
+    <section id="view-learn" class="view-section">
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold text-primary mb-1">Learn & Play Dashboard</h1>
+        <p class="text-on-surface-variant">Level up your cultural knowledge through voice quizzes, folklore reconstruction challenges, and interactive quests.</p>
+      </div>
+
+      <!-- Gamification Progress Card -->
+      <div class="gamify-progress-card">
+        <div class="level-badge-large">
+          <span class="level-txt">LEVEL</span>
+          <span class="level-num">7</span>
+        </div>
+
+        <div class="xp-progress-bar-wrap">
+          <div class="flex justify-between items-center text-sm font-semibold mb-1">
+            <span class="text-primary font-bold">Curious Historian</span>
+            <span class="text-on-surface-variant text-xs">750 XP to Level 8</span>
+          </div>
+          <div class="xp-progress-track">
+            <div class="xp-progress-fill"></div>
+          </div>
+          <p class="text-xs text-on-surface-variant">You're making great progress learning about indigenous crafts and living rituals.</p>
+        </div>
+
+        <div class="text-right">
+          <span class="text-3xl font-black text-[#2e5200]" id="user-xp-display">1,250 XP</span>
+          <span class="block text-xs text-on-surface-variant">Total Experience</span>
+        </div>
+      </div>
+
+      <!-- Active Challenges -->
+      <div class="section-title-group">
+        <h2 class="section-title">Active Challenges</h2>
+      </div>
+
+      <div class="challenges-grid">
+        <!-- Challenge 1: Voice Quiz -->
+        <div class="challenge-card">
+          <div class="challenge-badge-row">
+            <span class="pill-badge ancient">★ Easy</span>
+            <span class="text-xs font-bold text-secondary">+50 XP</span>
+          </div>
+          <h3 class="text-lg font-bold text-primary mb-1">Voice Quiz</h3>
+          <p class="text-xs text-on-surface-variant mb-6 flex-1">Practice pronouncing traditional names and places with real-time audio guidance.</p>
+          <button class="btn btn-terracotta btn-sm w-full" onclick="startQuizChallenge('voice')">
+            <span class="material-symbols-outlined text-sm">play_arrow</span> Start
+          </button>
+        </div>
+
+        <!-- Challenge 2: Cultural Quiz -->
+        <div class="challenge-card">
+          <div class="challenge-badge-row">
+            <span class="pill-badge festivals">★ Medium</span>
+            <span class="text-xs font-bold text-secondary">+150 XP</span>
+          </div>
+          <h3 class="text-lg font-bold text-primary mb-1">Cultural Quiz</h3>
+          <p class="text-xs text-on-surface-variant mb-6 flex-1">Test your knowledge on ancient artifacts, festivals, and world heritage sites.</p>
+          <button class="btn btn-primary btn-sm w-full" onclick="startQuizChallenge('cultural')">
+            <span class="material-symbols-outlined text-sm">arrow_forward</span> Continue
+          </button>
+        </div>
+
+        <!-- Challenge 3: Story Challenge -->
+        <div class="challenge-card">
+          <div class="challenge-badge-row">
+            <span class="pill-badge traditions">★ Hard</span>
+            <span class="text-xs font-bold text-secondary">+300 XP</span>
+          </div>
+          <h3 class="text-lg font-bold text-primary mb-1">Story Challenge</h3>
+          <p class="text-xs text-on-surface-variant mb-6 flex-1">Listen to fragmented oral histories and reconstruct the chronological timeline.</p>
+          <button class="btn btn-terracotta btn-sm w-full" onclick="startQuizChallenge('story')">
+            <span class="material-symbols-outlined text-sm">play_arrow</span> Start
+          </button>
+        </div>
+      </div>
+
+      <!-- Achievements Section -->
+      <div class="section-title-group flex justify-between items-center">
+        <h2 class="section-title">Your Achievements</h2>
+        <a href="#" class="text-sm font-semibold text-secondary hover:underline">View All &gt;</a>
+      </div>
+
+      <div class="achievements-row">
+        <div class="achievement-box">
+          <div class="achievement-icon-circle unlocked-green">
+            <span class="material-symbols-outlined">explore</span>
+          </div>
+          <h4 class="font-bold text-sm text-primary">Heritage Explorer</h4>
+          <p class="text-xs text-on-surface-variant">Visited 10 Cultural Sites</p>
+        </div>
+
+        <div class="achievement-box">
+          <div class="achievement-icon-circle unlocked-orange">
+            <span class="material-symbols-outlined">auto_stories</span>
+          </div>
+          <h4 class="font-bold text-sm text-primary">Story Keeper</h4>
+          <p class="text-xs text-on-surface-variant">Read 5 Oral Histories</p>
+        </div>
+
+        <div class="achievement-box">
+          <div class="achievement-icon-circle locked">
+            <span class="material-symbols-outlined">lock</span>
+          </div>
+          <h4 class="font-bold text-sm text-primary">Master Artisan</h4>
+          <p class="text-xs text-on-surface-variant">Complete Craft Quiz</p>
+        </div>
+
+        <div class="achievement-box">
+          <div class="achievement-icon-circle locked">
+            <span class="material-symbols-outlined">lock</span>
+          </div>
+          <h4 class="font-bold text-sm text-primary">Linguist</h4>
+          <p class="text-xs text-on-surface-variant">Ace Voice Quiz</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating "Talk to HeritAble" Voice Button -->
+  <div class="floating-voice-bar">
+    <button class="floating-voice-btn" id="floating-talk-btn">
+      <span class="material-symbols-outlined">mic</span> Talk to HeritAble
+    </button>
+  </div>
+
+  <!-- ==================== MODAL 1: ACCESSIBILITY ONBOARDING & SETTINGS ==================== -->
+  <div id="accessibility-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="close-accessibility-modal" aria-label="Close accessibility modal">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="split-modal-content">
+        <!-- Controls Column -->
+        <div>
+          <div class="flex items-center gap-2 text-secondary text-sm font-semibold mb-1">
+            <span class="material-symbols-outlined text-sm">settings_accessibility</span> HeritAble
+          </div>
+          <h2 class="text-2xl font-bold text-primary mb-2">Make HeritAble work for you</h2>
+          <p class="text-sm text-on-surface-variant mb-6">Select your preferred accessibility features to customize your cultural exploration experience. You can always change these later in settings.</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+            <!-- Voice First -->
+            <div class="pref-option-card" data-pref="voice-first">
+              <div class="pref-icon-box"><span class="material-symbols-outlined">record_voice_over</span></div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary">Voice First</h4>
+                <p class="text-xs text-on-surface-variant">Navigate by speaking</p>
+              </div>
+            </div>
+
+            <!-- Screen Reader -->
+            <div class="pref-option-card" data-pref="screen-reader">
+              <div class="pref-icon-box"><span class="material-symbols-outlined">volume_up</span></div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary">Screen Reader</h4>
+                <p class="text-xs text-on-surface-variant">Audio descriptions</p>
+              </div>
+            </div>
+
+            <!-- Large Text -->
+            <div class="pref-option-card" data-pref="large-text">
+              <div class="pref-icon-box"><span class="material-symbols-outlined">text_fields</span></div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary">Large Text</h4>
+                <p class="text-xs text-on-surface-variant">Increase font scale</p>
+              </div>
+            </div>
+
+            <!-- High Contrast -->
+            <div class="pref-option-card" data-pref="high-contrast">
+              <div class="pref-icon-box"><span class="material-symbols-outlined">contrast</span></div>
+              <div>
+                <h4 class="text-sm font-semibold text-primary">High Contrast</h4>
+                <p class="text-xs text-on-surface-variant">Enhance distinctions</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fine-Tuning Sliders -->
+          <div class="space-y-4 pt-4 border-t border-outline/15">
+            <div>
+              <label class="text-xs font-bold text-primary block">Text Size Scale</label>
+              <div class="settings-slider-row">
+                <span class="text-xs text-outline">A</span>
+                <input type="range" id="setting-text-size" min="1" max="3" value="1" step="1" />
+                <span class="text-lg font-bold text-primary">A</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="text-xs font-bold text-primary block">Voice Speed</label>
+              <div class="settings-slider-row">
+                <span class="material-symbols-outlined text-xs">speed</span>
+                <input type="range" id="setting-voice-speed" min="0.5" max="1.5" value="1.0" step="0.1" />
+                <span class="text-xs font-semibold text-primary">1.0x</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-3 mt-6">
+            <button class="btn btn-primary" id="save-accessibility-btn">Save Preferences</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('accessibility-modal').classList.remove('open')">Skip for now</button>
+          </div>
+        </div>
+
+        <!-- Live Preview Column -->
+        <div class="bg-surface-container-low p-6 rounded-xl border border-outline/15 flex flex-col justify-center">
+          <div class="flex items-center gap-2 text-xs font-bold text-secondary uppercase tracking-wider mb-3">
+            <span class="material-symbols-outlined text-sm">visibility</span> Live Preview
+          </div>
+
+          <div class="bg-surface-container-lowest p-5 rounded-lg border border-outline/10 shadow-sm">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="material-symbols-outlined text-primary">account_balance</span>
+              <div>
+                <span class="text-xs font-bold text-[#2e5200] block">EXAMPLE CONTENT</span>
+                <h4 class="font-bold text-primary text-base">The Grand Artifact</h4>
+              </div>
+            </div>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+              This is how cultural information will appear based on your current settings. The contrast, text size, and layout dynamically adapt for seamless readability.
+            </p>
+            <div class="flex gap-2 mb-4">
+              <span class="pill-badge traditions">19th Century</span>
+              <span class="pill-badge ancient">Ceramics</span>
+            </div>
+            <button class="btn btn-terracotta btn-sm w-full" onclick="speakText('This is a preview of your personalized HeritAble voice guide.')">
+              <span class="material-symbols-outlined text-sm">play_arrow</span> Start Guided Tour
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: AUTHENTICATION (LOGIN & SIGN UP) ==================== -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="auth-modal-card">
+      <button class="modal-close-btn" id="close-auth-modal" style="z-index: 20; background: var(--color-surface-container); border: 1px solid var(--color-outline-variant);" aria-label="Close login modal">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="auth-split-grid">
+        <!-- Visual Column -->
+        <div class="auth-split-visual" id="auth-visual-col" style="background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80');">
+          <div class="auth-visual-top">
+            <span class="auth-visual-badge">
+              <span class="material-symbols-outlined text-sm">auto_awesome</span>
+              AI-Powered Discovery
+            </span>
+          </div>
+
+          <div class="auth-visual-content">
+            <h2 class="text-2xl font-bold mb-2" id="auth-visual-heading" style="color: #ffffff; font-size: 26px; line-height: 1.25;">Preserving the past, designing the future.</h2>
+            <p class="text-xs opacity-90 mb-4" id="auth-visual-sub" style="color: rgba(255, 255, 255, 0.9); font-size: 13px; line-height: 1.5;">Join thousands of researchers, historians, and culture enthusiasts unlocking narratives hidden within global artifacts.</p>
+
+            <div class="auth-feature-list">
+              <div class="auth-feature-item">
+                <span class="auth-feature-icon">
+                  <span class="material-symbols-outlined">mic</span>
+                </span>
+                <span>Interactive Voice Storytelling with Gemini AI</span>
+              </div>
+              <div class="auth-feature-item">
+                <span class="auth-feature-icon">
+                  <span class="material-symbols-outlined">museum</span>
+                </span>
+                <span>3D Artifact Analyzer & Cultural Deep Dives</span>
+              </div>
+              <div class="auth-feature-item">
+                <span class="auth-feature-icon">
+                  <span class="material-symbols-outlined">travel_explore</span>
+                </span>
+                <span>Geo-Spatial Living Heritage Map</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Column -->
+        <div class="auth-form-column">
+          <!-- Brand header -->
+          <div class="auth-brand-row">
+            <a href="#" class="auth-brand-logo">
+              <span class="material-symbols-outlined" style="color: var(--color-secondary);">account_balance</span>
+              HeritAble<span class="dot">.</span>
+            </a>
+          </div>
+
+          <!-- Segmented Tab Switcher -->
+          <div class="auth-tabs">
+            <button type="button" class="auth-tab-btn active" id="tab-auth-login" onclick="toggleAuthMode('login')">
+              Login
+            </button>
+            <button type="button" class="auth-tab-btn" id="tab-auth-signup" onclick="toggleAuthMode('signup')">
+              Create Account
+            </button>
+          </div>
+
+          <!-- 1. LOGIN FORM -->
+          <form id="auth-login-form" onsubmit="handleLoginSubmit(event)">
+            <div class="auth-form-header">
+              <h3 class="auth-form-title">Welcome Back</h3>
+              <p class="auth-form-desc">Enter your credentials to continue your cultural journey.</p>
+            </div>
+
+            <div class="auth-field">
+              <label class="auth-field-label" for="login-email">Email Address</label>
+              <div class="auth-input-wrap">
+                <input type="email" id="login-email" class="auth-input" placeholder="name@example.com" required autocomplete="email" />
+                <span class="material-symbols-outlined auth-input-icon">mail</span>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label class="auth-field-label" for="login-password">Password</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="login-password" class="auth-input has-toggle" placeholder="Enter your password" required autocomplete="current-password" />
+                <span class="material-symbols-outlined auth-input-icon">lock</span>
+                <button type="button" class="auth-pwd-toggle" onclick="togglePasswordVisibility('login-password', 'login-pwd-icon')" aria-label="Toggle password visibility">
+                  <span class="material-symbols-outlined text-sm" id="login-pwd-icon">visibility</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-row-options">
+              <label class="auth-checkbox-label">
+                <input type="checkbox" id="login-remember" checked />
+                <span>Remember me</span>
+              </label>
+              <button type="button" class="auth-link" onclick="toggleAuthMode('forgot')">Forgot password?</button>
+            </div>
+
+            <button type="submit" class="auth-btn-primary" id="btn-submit-login">
+              <span>Login</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+            
+            <button type="button" class="auth-btn-voice" id="btn-voice-login" onclick="startVoiceLogin()">
+              <span class="material-symbols-outlined">mic</span>
+              <span id="voice-login-label">Use Voice to Login</span>
+            </button>
+
+            <div class="auth-divider">
+              <span>OR</span>
+            </div>
+
+            <button type="button" class="auth-btn-google" onclick="handleGoogleAuth()">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H17.92C17.66 15.63 16.88 16.79 15.72 17.57V20.34H19.28C21.36 18.42 22.56 15.6 22.56 12.25Z" fill="#4285F4"/><path d="M12 23C14.97 23 17.46 22.02 19.28 20.34L15.72 17.57C14.74 18.23 13.48 18.63 12 18.63C9.14 18.63 6.71 16.7 5.84 14.12H2.17V16.97C3.98 20.57 7.68 23 12 23Z" fill="#34A853"/><path d="M5.84 14.12C5.61 13.46 5.48 12.75 5.48 12C5.48 11.25 5.61 10.54 5.84 9.88V7.03H2.17C1.43 8.51 1 10.2 1 12C1 13.8 1.43 15.49 2.17 16.97L5.84 14.12Z" fill="#FBBC05"/><path d="M12 5.38C13.62 5.38 15.06 5.94 16.2 7.03L19.35 3.88C17.45 2.11 14.97 1 12 1C7.68 1 3.98 3.43 2.17 7.03L5.84 9.88C6.71 7.3 9.14 5.38 12 5.38Z" fill="#EA4335"/></svg>
+              <span>Continue with Google</span>
+            </button>
+
+            <p class="auth-switch-note">
+              New to HeritAble? <button type="button" class="auth-link" onclick="toggleAuthMode('signup')">Create an account</button>
+            </p>
+          </form>
+
+          <!-- 2. SIGN UP FORM -->
+          <form id="auth-signup-form" style="display: none;" onsubmit="handleSignupSubmit(event)">
+            <div class="auth-form-header">
+              <h3 class="auth-form-title">Create an account</h3>
+              <p class="auth-form-desc">Join a global community exploring AI-guided cultural heritage.</p>
+            </div>
+
+            <div class="auth-field">
+              <label class="auth-field-label" for="signup-name">Full Name</label>
+              <div class="auth-input-wrap">
+                <input type="text" id="signup-name" class="auth-input" placeholder="e.g. Alex Researcher" required autocomplete="name" />
+                <span class="material-symbols-outlined auth-input-icon">person</span>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label class="auth-field-label" for="signup-email">Email Address</label>
+              <div class="auth-input-wrap">
+                <input type="email" id="signup-email" class="auth-input" placeholder="you@example.com" required autocomplete="email" />
+                <span class="material-symbols-outlined auth-input-icon">mail</span>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label class="auth-field-label" for="signup-password">Password</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="signup-password" class="auth-input has-toggle" placeholder="Create a strong password" required autocomplete="new-password" minlength="6" />
+                <span class="material-symbols-outlined auth-input-icon">lock</span>
+                <button type="button" class="auth-pwd-toggle" onclick="togglePasswordVisibility('signup-password', 'signup-pwd-icon')" aria-label="Toggle password visibility">
+                  <span class="material-symbols-outlined text-sm" id="signup-pwd-icon">visibility</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label class="auth-field-label" for="signup-confirm-password">Confirm Password</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="signup-confirm-password" class="auth-input has-toggle" placeholder="Confirm your password" required autocomplete="new-password" />
+                <span class="material-symbols-outlined auth-input-icon">lock_reset</span>
+                <button type="button" class="auth-pwd-toggle" onclick="togglePasswordVisibility('signup-confirm-password', 'signup-cpwd-icon')" aria-label="Toggle confirm password visibility">
+                  <span class="material-symbols-outlined text-sm" id="signup-cpwd-icon">visibility</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label class="auth-field-label" for="signup-language">Preferred Language</label>
+              <div class="auth-input-wrap">
+                <select id="signup-language" class="auth-input">
+                  <option value="en">English</option>
+                  <option value="hi">Hindi (हिंदी)</option>
+                  <option value="es">Spanish (Español)</option>
+                  <option value="ja">Japanese (日本語)</option>
+                  <option value="fr">French (Français)</option>
+                  <option value="de">German (Deutsch)</option>
+                  <option value="ar">Arabic (العربية)</option>
+                </select>
+                <span class="material-symbols-outlined auth-input-icon">language</span>
+              </div>
+            </div>
+
+            <button type="submit" class="auth-btn-primary" id="btn-submit-signup">
+              <span>Create Account</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+
+            <div class="auth-divider">
+              <span>OR</span>
+            </div>
+
+            <button type="button" class="auth-btn-google" onclick="handleGoogleAuth()">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H17.92C17.66 15.63 16.88 16.79 15.72 17.57V20.34H19.28C21.36 18.42 22.56 15.6 22.56 12.25Z" fill="#4285F4"/><path d="M12 23C14.97 23 17.46 22.02 19.28 20.34L15.72 17.57C14.74 18.23 13.48 18.63 12 18.63C9.14 18.63 6.71 16.7 5.84 14.12H2.17V16.97C3.98 20.57 7.68 23 12 23Z" fill="#34A853"/><path d="M5.84 14.12C5.61 13.46 5.48 12.75 5.48 12C5.48 11.25 5.61 10.54 5.84 9.88V7.03H2.17C1.43 8.51 1 10.2 1 12C1 13.8 1.43 15.49 2.17 16.97L5.84 14.12Z" fill="#FBBC05"/><path d="M12 5.38C13.62 5.38 15.06 5.94 16.2 7.03L19.35 3.88C17.45 2.11 14.97 1 12 1C7.68 1 3.98 3.43 2.17 7.03L5.84 9.88C6.71 7.3 9.14 5.38 12 5.38Z" fill="#EA4335"/></svg>
+              <span>Sign up with Google</span>
+            </button>
+
+            <p class="auth-switch-note">
+              Already have an account? <button type="button" class="auth-link" onclick="toggleAuthMode('login')">Login</button>
+            </p>
+
+            <p class="auth-terms-note">
+              By registering, you agree to HeritAble's <a href="#" onclick="alert('Terms of Service: Respect cultural heritage & preserve open research.'); return false;">Terms of Service</a> and <a href="#" onclick="alert('Privacy Policy: Your data is secure and never sold.'); return false;">Privacy Policy</a>.
+            </p>
+          </form>
+
+          <!-- 3. FORGOT PASSWORD FORM -->
+          <form id="auth-forgot-form" style="display: none;" onsubmit="handleForgotPasswordSubmit(event)">
+            <div class="auth-form-header">
+              <h3 class="auth-form-title">Reset Password</h3>
+              <p class="auth-form-desc">Enter your account email address and we'll send you an instant recovery link.</p>
+            </div>
+
+            <div class="auth-field">
+              <label class="auth-field-label" for="forgot-email">Account Email</label>
+              <div class="auth-input-wrap">
+                <input type="email" id="forgot-email" class="auth-input" placeholder="name@example.com" required />
+                <span class="material-symbols-outlined auth-input-icon">mail</span>
+              </div>
+            </div>
+
+            <button type="submit" class="auth-btn-primary" style="margin-top: 12px;">
+              <span>Send Recovery Link</span>
+              <span class="material-symbols-outlined text-sm">send</span>
+            </button>
+
+            <p class="auth-switch-note" style="margin-top: 18px;">
+              Remember your password? <button type="button" class="auth-link" onclick="toggleAuthMode('login')">Back to Login</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Toast Container -->
+  <div id="auth-toast-container" class="auth-toast-container"></div>
+
+  <!-- ==================== MODAL 3: QUIZ & CHALLENGES GAMEPLAY ==================== -->
+  <div id="quiz-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 580px;">
+      <button class="modal-close-btn" id="close-quiz-modal" aria-label="Close quiz modal">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div id="quiz-content-area">
+        <!-- Dynamically populated via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Backend & Authentication Service -->
+  <script type="module" src="./firebase-config.js"></script>
+
+  <!-- Standalone Vanilla JS Controller -->
+  <script src="./script.js"></script>
+</body>
+</html>

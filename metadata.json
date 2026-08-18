@@ -1,0 +1,6 @@
+{
+  "name": "HeritAble - AI Cultural Heritage Guide",
+  "description": "Interactive cultural heritage platform featuring AI museum storytelling, heritage map, accessible cultural discovery, and interactive challenges.",
+  "requestFramePermissions": ["microphone", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
